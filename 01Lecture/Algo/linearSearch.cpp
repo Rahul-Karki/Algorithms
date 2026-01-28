@@ -36,7 +36,7 @@ int getAverageTime(int n) {
 }
 
 int main() {
-    for (int i = 1000; i <= 9000; i += 1000) {
+    for (int i = 1000; i <= 10000; i += 1000) {
         int avg_time = getAverageTime(i);
         cout << "For size " << i << " the average time taken was " << avg_time << " ns" << endl;
     }

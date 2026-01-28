@@ -113,6 +113,8 @@ After backtracking, it adds **'1'** and repeats the process.
 
 This ensures that all possible binary combinations are generated.
 
+![Tower of Hanio Graph](Images/TOH.png)
+
 ## Practical-5: Ball Jump Problem
 
 ### **Aim**
@@ -172,7 +174,8 @@ The **getAverageTime(n)** function:
 - Measures the execution time using high resolution clock
 - Repeats this process 100 times and calculates the average time
 
-The **main()** function prints the average time taken for array sizes from 100 to 1000.
+
+![Selection Sort Graph](Images/selectionSort.png)
 
 
 ## Practical-7: Recursive Bubble Sort and Time Analysis
@@ -203,7 +206,8 @@ The **getAverageTime(n)** function:
 - Measures execution time using high resolution clock
 - Repeats the process 100 times and calculates the average time
 
-The **main()** function displays the average time taken for array sizes ranging from 100 to 1000.
+
+![Bubble Sort Graph](Images/bbSort)
 
 ## Practical-8: Recursive Linear Search and Time Analysis
 
@@ -235,7 +239,7 @@ The **getAverageTime(n)** function:
 - Measures execution time using high resolution clock
 - Repeats the process 100 times and calculates the average time
 
-The **main()** function prints the average time taken for array sizes from 1000 to 9000.
+![Linear Search Graph](Images/linearSearch.png)
 
 ## Practical-9: Polynomial Evaluation Using Horner’s Rule
 
