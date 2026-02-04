@@ -44,7 +44,7 @@ int getAverageTime(int n) {
 }
 
 int main() {
-    for (int i = 10000; i <= 90000; i += 10000) {
+    for (int i = 1000; i <= 9000; i += 1000) {
         int time = getAverageTime(i);
         cout << "For " << i << " elements, time = "
              << time << " ns" << endl;
