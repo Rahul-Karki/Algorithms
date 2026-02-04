@@ -86,6 +86,7 @@ Otherwise, it first moves **n − 1** disks from source to helper.
 Then it moves the nth disk from source to destination.  
 Finally, it moves the **n − 1** disks from helper to destination.
 
+![Tower of Hanio Graph](Images/TOH.png)
 
 ## Practical-4: Generate Binary Strings
 
@@ -113,7 +114,6 @@ After backtracking, it adds **'1'** and repeats the process.
 
 This ensures that all possible binary combinations are generated.
 
-![Tower of Hanio Graph](Images/TOH.png)
 
 ## Practical-5: Ball Jump Problem
 
@@ -207,7 +207,7 @@ The **getAverageTime(n)** function:
 - Repeats the process 100 times and calculates the average time
 
 
-![Bubble Sort Graph](Images/bbSort)
+![Bubble Sort Graph](Images/bbSort.png)
 
 ## Practical-8: Recursive Linear Search and Time Analysis
 
