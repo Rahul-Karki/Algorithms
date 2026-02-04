@@ -1,11 +1,11 @@
-Lab 2 
+## Lab 2 
 
-Practical-1: Binary Search (Recursive) and Time Analysis
-Aim
+## Practical-1: Binary Search (Recursive) and Time Analysis
+## Aim
 
 To implement Binary Search using recursion and analyze its execution time for different input sizes.
 
-Theory
+## Theory
 
 Binary Search is an efficient searching algorithm that works on a sorted array.
 It follows the divide and conquer technique by repeatedly dividing the search interval into two halves.
@@ -24,7 +24,7 @@ Continue until the element is found or the search space becomes empty.
 
 Binary Search is much faster than Linear Search for large datasets.
 
-Time Complexity
+## Time Complexity
 
 Best Case: O(1)
 
@@ -32,11 +32,11 @@ Average Case: O(log n)
 
 Worst Case: O(log n)
 
-Space Complexity
+## Space Complexity
 
 O(log n) (recursive stack)
 
-What the Code Does
+ ## What the Code Does
 
 This program searches for an element in a sorted array using recursive Binary Search.
 
@@ -62,12 +62,12 @@ Calculates the average execution time
 ![Binary Search Graph]()
 
 
-Practical-2: Insertion Sort
-Aim
+## Practical-2: Insertion Sort
+## Aim
 
 To sort an array using Insertion Sort and analyze its time complexity.
 
-Theory
+## Theory
 
 Insertion Sort is a simple comparison-based sorting algorithm.
 It works by dividing the array into a sorted and an unsorted part.
@@ -80,7 +80,7 @@ The element is placed at the correct position in the sorted part by shifting lar
 
 This process is repeated until the entire array is sorted.
 
-Time Complexity
+## Time Complexity
 
 Best Case: O(n)
 
@@ -92,7 +92,7 @@ Space Complexity
 
 Recursive method: O(n)
 
-What the Code Does
+## What the Code Does
 
 This program sorts an array using recursive Insertion Sort.
 
