@@ -6,12 +6,6 @@
 using namespace std;
 using namespace std::chrono;
 
-void fill(int arr[], int n) {
-    for (int i = 0; i < n; i++) {
-        arr[i] = rand() % 1000;
-    }
-}
-
 void bubbleSortRecursive(int arr[], int n) {
     if (n == 1) return;
 
@@ -32,7 +26,6 @@ int getAverageTime(int n) {
         for (int j = 0; j < n; j++) {
             arr[j] = rand();
         }
-        int target = rand();
 
         auto x = high_resolution_clock::now();
         bubbleSortRecursive(arr, n);
