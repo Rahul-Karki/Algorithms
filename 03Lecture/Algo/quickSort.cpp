@@ -11,7 +11,7 @@ void partition(vector<int>& arr,int low,int high){
     int pivot = arr[low];
 
 
-    for(int i=low+1; i<=high; i++){
+    for(int i=low+1; i<high; i++){
         if(pivot >= arr[i]){
             smaller++;
         }
