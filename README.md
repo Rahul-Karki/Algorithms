@@ -11,6 +11,7 @@ This repository contains lecture-wise algorithm practicals from Semester 4.
 - [Lecture 05](05Lecture/README.md)
 - [Lecture 06](06Lecture/README.md)
 - [Lecture 07](07Lecture/README.md)
+- [Lecture 08](08Lecture/README.md)
 
 ## Practicals by Lecture
 
@@ -51,6 +52,11 @@ This repository contains lecture-wise algorithm practicals from Semester 4.
 
 ### Lecture 07
 - Multi-Stage Graph Minimum Cost Path
+
+### Lecture 08
+- Multi-Stage Graph (Forward Approach)
+- Multi-Stage Graph (Backward Approach)
+- Matrix Chain Multiplication (Dynamic Programming)
 
 ## Folder Structure
 
