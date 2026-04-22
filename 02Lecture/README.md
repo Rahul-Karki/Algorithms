@@ -59,7 +59,7 @@ Repeats the experiment 100 times
 
 Calculates the average execution time
 
-![Binary Search Graph]()
+![Binary Search Graph](Images/binarySearch.png)
 
 
 ## Practical-2: Insertion Sort

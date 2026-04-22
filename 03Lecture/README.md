@@ -47,6 +47,8 @@ This process continues until the full array is sorted.
 
 The execution time is measured for different input sizes using a high-resolution clock, and the average time is calculated over multiple runs.
 
+![Merge Sort Graph](Images/mergeSort.png)
+
 ## Practical-2: Quick Sort
 ## Aim
 
@@ -95,3 +97,5 @@ Elements to the right of the pivot are recursively sorted.
 The process continues until the entire array becomes sorted.
 
 The execution time is measured using a high-resolution clock and averaged over multiple runs for different input sizes
+
+![Quick Sort Graph](Images/quickSort.png)
