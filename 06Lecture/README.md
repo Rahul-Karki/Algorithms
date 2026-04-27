@@ -31,6 +31,8 @@ The printMaxActivities(arr, n) function selects activities one by one by checkin
 
 The selected activity list is printed as output.
 
+![Activity Selection Graph](Images/activitySelection.png)
+
 ## Practical-2: Dijkstra's Shortest Path Algorithm
 ## Aim
 
@@ -61,6 +63,8 @@ The dijkstra(source, visited, dist, cost, adj) function uses a min heap to proce
 Whenever a shorter path is found, dist is updated and neighboring vertices are pushed again.
 
 At the end, the program prints the shortest distance from source to every vertex.
+
+![Dijkstra Graph](Images/dijkstra.png)
 
 ## Practical-3: Kruskal's Minimum Spanning Tree
 ## Aim
@@ -97,6 +101,8 @@ The kruskal(n, edges) function chooses valid edges, prints them, and returns MST
 
 If a full spanning tree is not possible, it prints No Spanning Tree.
 
+![Kruskal Graph](Images/kruskal.png)
+
 ## Practical-4: Prim's Minimum Spanning Tree
 ## Aim
 
@@ -125,3 +131,5 @@ This program uses a fixed weighted adjacency matrix graph.
 The minKey(key, mstSet) function selects the next vertex with minimum key value not yet in MST.
 
 The primMST(graph) function updates parent and key arrays and prints all MST edges with weights.
+
+![Prim's Graph](Images/prims.png)

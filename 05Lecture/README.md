@@ -37,6 +37,8 @@ The convexHull(points) function builds the hull by removing points that do not m
 
 The main function prints all points present on the hull.
 
+![Convex Hull Graph](Images/convexHull.png)
+
 ## Practical-2: Fractional Knapsack (Greedy Comparison)
 ## Aim
 
@@ -76,6 +78,8 @@ For each ordering, it fills the knapsack until capacity ends and adds a fraction
 
 Finally, it prints the profit obtained by each approach.
 
+![Fractional Knapsack Graph](Images/knapsack.png)
+
 ## Practical-3: Maximum and Minimum Using Divide and Conquer
 ## Aim
 
@@ -110,3 +114,5 @@ Two elements: compare once and assign min/max.
 More than two elements: split at mid, solve both halves, then combine results.
 
 The main function calls maxmin and prints the final minimum and maximum values.
+
+![Max-Min Graph](Images/maxmin.png)

@@ -37,6 +37,8 @@ Nested loops relax edges only in forward direction (i to j where j > i).
 
 Finally, it prints minimum cost to the last node and prints the full path by tracing parent links.
 
+![Forward Approach Graph](Images/forward.png)
+
 ## Practical-2: Multi-Stage Graph (Backward Approach)
 ## Aim
 
@@ -73,6 +75,8 @@ The decision array stores the next node on the optimal path.
 The algorithm computes minCost values from node n-2 down to node 0.
 
 At the end, it prints the minimum cost and the optimal path from source to destination.
+
+![Backward Approach Graph](Images/backward.png)
 
 ## Practical-3: Matrix Chain Multiplication (Dynamic Programming)
 ## Aim
@@ -112,3 +116,5 @@ The s table stores split index k that gave the optimal cost.
 The program fills these tables diagonally by increasing chain length.
 
 Finally, it prints both M matrix (cost table) and S matrix (optimal split table).
+
+![Matrix Chain Multiplication Graph](Images/mcm.png)

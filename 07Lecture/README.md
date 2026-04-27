@@ -28,3 +28,5 @@ The makeStages(a, V, s, stages) function performs level-order traversal from sou
 The findMinCost(stages, a, sink, minCost, i) function recursively processes stages backward and accumulates path cost.
 
 The main function reads source and destination nodes, builds stages, computes cost, and prints the final minimum cost.
+
+![Multi-Stage Graph](Images/multiStage.png)
