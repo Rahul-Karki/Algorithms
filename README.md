@@ -1,16 +1,28 @@
-# Algorithms — Practicals (Unified, numbered)
+# Algorithms Practicals
 
-This README presents all practicals in a single, numbered sequence (not lecture-wise). Each practical follows the same compact format:
-- **Practical N - name**
-- **Aim**
-- **Algorithm** (clear numbered/bullet steps)
-- **Time Complexity**
-- **Space Complexity**
-- **Code** (core functions only — includes/imports removed)
-- **Use Cases** (exactly 3 bullet points)
-- **Graph** (embedded image when available)
+A curated README for the Algorithms folder. It collects the practicals in one place and embeds graph snapshots wherever the repository already has them.
 
-Tips: to regenerate graphs run the plotting scripts under the corresponding `Graphs/` folders.
+## What's Inside
+
+- Recursion, sorting, and searching practicals.
+- Divide-and-conquer, backtracking, and dynamic programming examples.
+- Graph-based routines with generated plot previews.
+
+## Featured Graphs
+
+| Practical | Preview |
+| --- | --- |
+| Bubble Sort | ![Bubble Sort](01Lecture/Images/bbSort.png) |
+| Linear Search | ![Linear Search](01Lecture/Images/linearSearch.png) |
+| Merge Sort | ![Merge Sort](03Lecture/Images/mergeSort.png) |
+| Quick Sort | ![Quick Sort](03Lecture/Images/quickSort.png) |
+| Convex Hull | ![Convex Hull](05Lecture/Images/convexHull.png) |
+| Dijkstra | ![Dijkstra](06Lecture/Images/dijkstra.png) |
+| Multi-Stage Graph | ![Multi-Stage Graph](07Lecture/Images/multiStage.png) |
+| Matrix Chain Multiplication | ![Matrix Chain Multiplication](08Lecture/Images/mcm.png) |
+| Floyd-Warshall | ![Floyd-Warshall](09Lecture/Images/floydWarshall.png) |
+
+Tip: to regenerate graphs, run the plotting scripts under the corresponding `Graphs/` folders.
 
 ---
 
@@ -45,7 +57,7 @@ int getAverageTime(int n) {
   - Demonstrating behavior on small or nearly-sorted datasets.
   - Classroom exercises comparing recursive vs iterative implementations.
 - **Graph:**
-![Bubble Sort Time](01Lecture/Images/bubbleSort.png)
+![Bubble Sort Time](01Lecture/Images/bbSort.png)
 
 **Practical 2 - consecutive**
 - **Aim:** Detect duplicate using index/value relation.
@@ -195,7 +207,7 @@ void towerOfHanoi(int n,char src,char dst,char hlp){ if(n==1) return; towerOfHan
   - Visual recursion walkthroughs.
   - Complexity growth examples.
 - **Graph:**
-![Tower of Hanoi Time](01Lecture/Images/towerOfHanio.png)
+![Tower of Hanoi Time](01Lecture/Images/TOH.png)
 
 **Practical 10 - TruthTable**
 - **Aim:** Generate all binary strings of length n.
@@ -286,11 +298,6 @@ int binarySearch(int arr[],int low,int high,int target){ if(low>high) return -1;
   - Competitive programming basics.
 - **Graph:**
 ![Binary Search Time](02Lecture/Images/binarySearch.png)
-
-*(File continues with other practicals in the same format. Tell me if you want me to expand all remaining files now.)*
-
-
-![Multi-Stage Graph](07Lecture/Images/multiStage.png)
 
 ## Lecture 08
 
