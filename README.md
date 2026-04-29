@@ -70,6 +70,8 @@ Implement fast exponentiation using divide-and-conquer vs naive recursion. Compa
 
 ### Code
 ```cpp
+using namespace std;
+
 int powerRec(int x, int n) {
     if (n == 0) return 1;
     int half = powerRec(x, n / 2);
@@ -108,15 +110,17 @@ Generate all permutations of a string using backtracking.
 
 ### Code
 ```cpp
-void permute(std::string &s, int index) {
+using namespace std;
+
+void permute(string &s, int index) {
     if (index == (int)s.length()) {
-        std::cout << s << "\n";
+        cout << s << "\n";
         return;
     }
     for (int i = index; i < (int)s.length(); ++i) {
-        std::swap(s[index], s[i]);
+        swap(s[index], s[i]);
         permute(s, index + 1);
-        std::swap(s[index], s[i]);
+        swap(s[index], s[i]);
     }
 }
 ```
@@ -146,13 +150,15 @@ Solve Tower of Hanoi puzzle using recursion. Demonstrate exponential growth (2^n
 
 ### Code
 ```cpp
+using namespace std;
+
 void towerOfHanoi(int n, char src, char dst, char hlp) {
     if (n == 1) {
-        std::cout << "Move disk from " << src << " to " << dst << "\n";
+        cout << "Move disk from " << src << " to " << dst << "\n";
         return;
     }
     towerOfHanoi(n - 1, src, hlp, dst);
-    std::cout << "Move disk from " << src << " to " << dst << "\n";
+    cout << "Move disk from " << src << " to " << dst << "\n";
     towerOfHanoi(n - 1, hlp, dst, src);
 }
 ```
@@ -184,9 +190,11 @@ Generate all 2^n binary strings of length n using backtracking.
 
 ### Code
 ```cpp
-void generate(std::string s, int n) {
+using namespace std;
+
+void generate(string s, int n) {
     if ((int)s.length() == n) {
-        std::cout << s << "\n";
+        cout << s << "\n";
         return;
     }
     s.push_back('0');
@@ -223,6 +231,8 @@ Recursive linear search on unsorted arrays. Baseline for search algorithm compar
 
 ### Code
 ```cpp
+using namespace std;
+
 bool linearSearch(int arr[], int n, int target, int index) {
     if (index >= n) return false;
     if (arr[index] == target) return true;
@@ -257,11 +267,13 @@ Recursive bubble sort. Simple teaching algorithm for sorting fundamentals.
 
 ### Code
 ```cpp
+using namespace std;
+
 void bubbleSortRecursive(int arr[], int n) {
     if (n == 1) return;
     for (int i = 0; i < n - 1; i++) {
         if (arr[i] > arr[i + 1]) 
-            std::swap(arr[i], arr[i + 1]);
+            swap(arr[i], arr[i + 1]);
     }
     bubbleSortRecursive(arr, n - 1);
 }
@@ -294,6 +306,8 @@ Recursive selection sort. Minimal swaps, constant O(n²) performance.
 
 ### Code
 ```cpp
+using namespace std;
+
 int minIndex(int arr[], int i, int n) {
     int mn = i;
     for (int j = i; j < n; j++) {
@@ -305,7 +319,7 @@ int minIndex(int arr[], int i, int n) {
 void selectionSort(int arr[], int i, int n) {
     if (i == n) return;
     int idx = minIndex(arr, i, n);
-    std::swap(arr[i], arr[idx]);
+    swap(arr[i], arr[idx]);
     selectionSort(arr, i + 1, n);
 }
 ```
@@ -336,6 +350,8 @@ Efficiently evaluate polynomials using nested multiplication. Reduces operations
 
 ### Code
 ```cpp
+using namespace std;
+
 int horner(int coeff[], int n, int x) {
     if (n == 1) return coeff[0];
     return coeff[0] * x + horner(coeff + 1, n - 1, x);
@@ -410,7 +426,9 @@ Detect anomalies using index/value XOR relationship.
 
 ### Code
 ```cpp
-int findDup(const std::vector<int>& nums) {
+using namespace std;
+
+int findDup(const vector<int>& nums) {
     for (int i = 0; i < (int)nums.size(); ++i) {
         if ((nums[i] ^ i) != 0) return nums[i];
     }
@@ -443,6 +461,8 @@ Calculate bounce count before height decays below threshold (exponential decay m
 
 ### Code
 ```cpp
+using namespace std;
+
 int jumps(double v, int t) {
     if (v < 1) return t;
     t++;
@@ -488,6 +508,8 @@ Efficient binary search on sorted arrays. O(log n) complexity vs O(n) linear sea
 
 ### Code
 ```cpp
+using namespace std;
+
 int binarySearch(int arr[], int low, int high, int target) {
     if (low > high) return -1;
     int mid = low + (high - low) / 2;
@@ -526,6 +548,8 @@ Build sorted array incrementally by inserting elements. Superior for nearly-sort
 
 ### Code
 ```cpp
+using namespace std;
+
 void insertionSort(int arr[], int n) {
     if (n <= 1) return;
     insertionSort(arr, n - 1);
@@ -568,6 +592,8 @@ Stable O(n log n) guaranteed sorting. Divide-and-conquer exemplified through mer
 
 ### Code
 ```cpp
+using namespace std;
+
 void merge(int arr[], int left, int mid, int right) {
     int n1 = mid - left + 1;
     int n2 = right - mid;
@@ -623,16 +649,18 @@ Practical in-place sorting with O(n log n) average case and lower constant facto
 
 ### Code
 ```cpp
+using namespace std;
+
 int partition(int arr[], int low, int high) {
     int pivot = arr[high];
     int i = low - 1;
     for (int j = low; j < high; j++) {
         if (arr[j] < pivot) {
             i++;
-            std::swap(arr[i], arr[j]);
+            swap(arr[i], arr[j]);
         }
     }
-    std::swap(arr[i + 1], arr[high]);
+    swap(arr[i + 1], arr[high]);
     return i + 1;
 }
 
@@ -675,16 +703,18 @@ Find k-th smallest element without full sort. O(n) average using partition strat
 
 ### Code
 ```cpp
+using namespace std;
+
 int partitionQuick(int arr[], int low, int high) {
     int pivot = arr[high];
     int i = low - 1;
     for (int j = low; j < high; j++) {
         if (arr[j] <= pivot) {
             i++;
-            std::swap(arr[i], arr[j]);
+            swap(arr[i], arr[j]);
         }
     }
-    std::swap(arr[i + 1], arr[high]);
+    swap(arr[i + 1], arr[high]);
     return i + 1;
 }
 
@@ -723,6 +753,8 @@ Reduce matrix multiplications from 8 to 7 using divide-and-conquer. O(n^2.81) as
 
 ### Code
 ```cpp
+using namespace std;
+
 void add(int A[][2], int B[][2], int C[][2]) {
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 2; j++)
@@ -770,14 +802,16 @@ Find smallest convex polygon containing point set using polar angle sorting.
 
 ### Code
 ```cpp
-int orientation(std::pair<int,int> p, std::pair<int,int> q, std::pair<int,int> r) {
+using namespace std;
+
+int orientation(pair<int,int> p, pair<int,int> q, pair<int,int> r) {
     long long val = (long long)(q.second - p.second) * (r.first - q.first) -
                     (long long)(q.first - p.first) * (r.second - q.second);
     if (val == 0) return 0;
     return (val > 0) ? 1 : 2;
 }
 
-std::vector<std::pair<int,int>> convexHull(std::vector<std::pair<int,int>>& points) {
+vector<pair<int,int>> convexHull(vector<pair<int,int>>& points) {
     int n = points.size();
     int min_idx = 0;
     for (int i = 1; i < n; i++) {
@@ -786,14 +820,14 @@ std::vector<std::pair<int,int>> convexHull(std::vector<std::pair<int,int>>& poin
              points[i].first < points[min_idx].first))
             min_idx = i;
     }
-    std::swap(points[0], points[min_idx]);
-    std::sort(points.begin() + 1, points.end(), 
+    swap(points[0], points[min_idx]);
+    sort(points.begin() + 1, points.end(), 
         [&](const auto& a, const auto& b) {
             int o = orientation(points[0], a, b);
             if (o == 0) return true;
             return o == 2;
         });
-    std::vector<std::pair<int,int>> hull;
+    vector<pair<int,int>> hull;
     for (auto& p : points) {
         while (hull.size() > 1 && 
                orientation(hull[hull.size()-2], hull[hull.size()-1], p) != 2)
@@ -831,14 +865,16 @@ Maximize profit with limited capacity by greedily selecting items by profit/weig
 
 ### Code
 ```cpp
+using namespace std;
+
 struct Item {
     double profit;
     double weight;
     double ratio;
 };
 
-double fractionalKnapsack(std::vector<Item>& items, double capacity) {
-    std::sort(items.begin(), items.end(), 
+double fractionalKnapsack(vector<Item>& items, double capacity) {
+    sort(items.begin(), items.end(), 
         [](const Item& a, const Item& b) {
             return a.ratio > b.ratio;
         });
@@ -886,6 +922,8 @@ Find min and max simultaneously with fewer comparisons (3n/2 - 2 vs 2n - 2).
 
 ### Code
 ```cpp
+using namespace std;
+
 struct MinMax {
     int min;
     int max;
@@ -910,8 +948,8 @@ MinMax minMax(int arr[], int low, int high) {
     int mid = low + (high - low) / 2;
     MinMax left = minMax(arr, low, mid);
     MinMax right = minMax(arr, mid + 1, high);
-    result.min = std::min(left.min, right.min);
-    result.max = std::max(left.max, right.max);
+    result.min = min(left.min, right.min);
+    result.max = max(left.max, right.max);
     return result;
 }
 ```
@@ -945,17 +983,19 @@ Select maximum non-overlapping activities by greedily choosing earliest-finishin
 
 ### Code
 ```cpp
+using namespace std;
+
 struct Activity {
     int start;
     int finish;
 };
 
-std::vector<int> activitySelection(std::vector<Activity>& activities) {
-    std::sort(activities.begin(), activities.end(),
+vector<int> activitySelection(vector<Activity>& activities) {
+    sort(activities.begin(), activities.end(),
         [](const Activity& a, const Activity& b) {
             return a.finish < b.finish;
         });
-    std::vector<int> selected;
+    vector<int> selected;
     selected.push_back(0);
     int lastFinish = activities[0].finish;
     for (int i = 1; i < activities.size(); i++) {
@@ -995,14 +1035,16 @@ Find shortest distance from source to all vertices in weighted graph (non-negati
 
 ### Code
 ```cpp
-void dijkstra(int src, std::vector<std::vector<std::pair<int,int>>>& adj, 
-              std::vector<int>& dist) {
+using namespace std;
+
+void dijkstra(int src, vector<vector<pair<int,int>>>& adj, 
+              vector<int>& dist) {
     int V = adj.size();
     dist.assign(V, INT_MAX);
     dist[src] = 0;
-    std::priority_queue<std::pair<int,int>, 
-                       std::vector<std::pair<int,int>>,
-                       std::greater<std::pair<int,int>>> pq;
+    priority_queue<pair<int,int>, 
+                   vector<pair<int,int>>,
+                   greater<pair<int,int>>> pq;
     pq.push({0, src});
     while (!pq.empty()) {
         auto [d, u] = pq.top();
@@ -1045,6 +1087,8 @@ Find MST by greedily adding minimum weight edges without creating cycles using U
 
 ### Code
 ```cpp
+using namespace std;
+
 struct Edge {
     int u, v, weight;
     bool operator<(const Edge& other) const {
@@ -1054,7 +1098,7 @@ struct Edge {
 
 class UnionFind {
 public:
-    std::vector<int> parent, rank;
+    vector<int> parent, rank;
     UnionFind(int n) : parent(n), rank(n, 0) {
         for (int i = 0; i < n; i++) parent[i] = i;
     }
@@ -1065,15 +1109,15 @@ public:
     bool unionSets(int x, int y) {
         x = find(x), y = find(y);
         if (x == y) return false;
-        if (rank[x] < rank[y]) std::swap(x, y);
+        if (rank[x] < rank[y]) swap(x, y);
         parent[y] = x;
         if (rank[x] == rank[y]) rank[x]++;
         return true;
     }
 };
 
-int kruskal(int V, std::vector<Edge>& edges) {
-    std::sort(edges.begin(), edges.end());
+int kruskal(int V, vector<Edge>& edges) {
+    sort(edges.begin(), edges.end());
     UnionFind uf(V);
     int totalWeight = 0, edgeCount = 0;
     for (const auto& e : edges) {
@@ -1114,10 +1158,12 @@ Find MST by incrementally growing tree from source, always adding minimum-weight
 
 ### Code
 ```cpp
+using namespace std;
+
 int primMST(int graph[][5], int V) {
-    std::vector<bool> inMST(V, false);
-    std::vector<int> key(V, INT_MAX);
-    std::vector<int> parent(V, -1);
+    vector<bool> inMST(V, false);
+    vector<int> key(V, INT_MAX);
+    vector<int> parent(V, -1);
     key[0] = 0;
     int totalWeight = 0;
     for (int count = 0; count < V; count++) {
@@ -1168,9 +1214,11 @@ Find minimum cost path from source to destination in multi-stage directed graph 
 
 ### Code
 ```cpp
-void findMinCostPath(std::vector<std::vector<int>>& cost, int n) {
-    std::vector<int> minCost(n, INT_MAX);
-    std::vector<int> decision(n, -1);
+using namespace std;
+
+void findMinCostPath(vector<vector<int>>& cost, int n) {
+    vector<int> minCost(n, INT_MAX);
+    vector<int> decision(n, -1);
     minCost[n-1] = 0;
     for (int i = n - 2; i >= 0; i--) {
         for (int j = i + 1; j < n; j++) {
@@ -1180,14 +1228,14 @@ void findMinCostPath(std::vector<std::vector<int>>& cost, int n) {
             }
         }
     }
-    std::cout << "Minimum cost: " << minCost[0] << "\n";
+    cout << "Minimum cost: " << minCost[0] << "\n";
     int curr = 0;
-    std::cout << "Path: " << curr;
+    cout << "Path: " << curr;
     while (decision[curr] != -1) {
         curr = decision[curr];
-        std::cout << " -> " << curr;
+        cout << " -> " << curr;
     }
-    std::cout << "\n";
+    cout << "\n";
 }
 ```
 
@@ -1220,9 +1268,11 @@ Find minimum cost path processing stages from source forward.
 
 ### Code
 ```cpp
-void forwardDP(std::vector<std::vector<int>>& cost, int n) {
-    std::vector<int> dist(n, INT_MAX);
-    std::vector<int> parent(n, -1);
+using namespace std;
+
+void forwardDP(vector<vector<int>>& cost, int n) {
+    vector<int> dist(n, INT_MAX);
+    vector<int> parent(n, -1);
     dist[0] = 0;
     for (int i = 0; i < n - 1; i++) {
         for (int j = i + 1; j < n; j++) {
@@ -1234,17 +1284,17 @@ void forwardDP(std::vector<std::vector<int>>& cost, int n) {
             }
         }
     }
-    std::cout << "Minimum cost: " << dist[n-1] << "\n";
-    std::vector<int> path;
+    cout << "Minimum cost: " << dist[n-1] << "\n";
+    vector<int> path;
     int curr = n - 1;
     while (curr != -1) {
         path.push_back(curr);
         curr = parent[curr];
     }
-    std::reverse(path.begin(), path.end());
-    std::cout << "Path: ";
-    for (int v : path) std::cout << v << " ";
-    std::cout << "\n";
+    reverse(path.begin(), path.end());
+    cout << "Path: ";
+    for (int v : path) cout << v << " ";
+    cout << "\n";
 }
 ```
 
@@ -1274,9 +1324,11 @@ Find minimum cost path processing stages backward from destination.
 
 ### Code
 ```cpp
-void backwardDP(std::vector<std::vector<int>>& cost, int n) {
-    std::vector<int> minCost(n, INT_MAX);
-    std::vector<int> nextVertex(n, -1);
+using namespace std;
+
+void backwardDP(vector<vector<int>>& cost, int n) {
+    vector<int> minCost(n, INT_MAX);
+    vector<int> nextVertex(n, -1);
     minCost[n-1] = 0;
     for (int i = n - 2; i >= 0; i--) {
         for (int j = i + 1; j < n; j++) {
@@ -1288,14 +1340,14 @@ void backwardDP(std::vector<std::vector<int>>& cost, int n) {
             }
         }
     }
-    std::cout << "Minimum cost: " << minCost[0] << "\n";
-    std::cout << "Path: " << 0;
+    cout << "Minimum cost: " << minCost[0] << "\n";
+    cout << "Path: " << 0;
     int curr = 0;
     while (nextVertex[curr] != -1) {
         curr = nextVertex[curr];
-        std::cout << " -> " << curr;
+        cout << " -> " << curr;
     }
-    std::cout << "\n";
+    cout << "\n";
 }
 ```
 
@@ -1326,10 +1378,12 @@ Find optimal parenthesization for matrix chain to minimize scalar multiplication
 
 ### Code
 ```cpp
-void matrixChainOrder(std::vector<int>& p) {
+using namespace std;
+
+void matrixChainOrder(vector<int>& p) {
     int n = p.size() - 1;
-    std::vector<std::vector<int>> m(n, std::vector<int>(n, 0));
-    std::vector<std::vector<int>> s(n, std::vector<int>(n, 0));
+    vector<vector<int>> m(n, vector<int>(n, 0));
+    vector<vector<int>> s(n, vector<int>(n, 0));
     for (int l = 2; l <= n; l++) {
         for (int i = 0; i <= n - l; i++) {
             int j = i + l - 1;
@@ -1343,7 +1397,7 @@ void matrixChainOrder(std::vector<int>& p) {
             }
         }
     }
-    std::cout << "Minimum multiplications: " << m[0][n-1] << "\n";
+    cout << "Minimum multiplications: " << m[0][n-1] << "\n";
 }
 ```
 
@@ -1375,7 +1429,9 @@ Find shortest distances between all vertex pairs. Handles negative edges (not cy
 
 ### Code
 ```cpp
-void floydWarshall(std::vector<std::vector<int>>& dist, int V) {
+using namespace std;
+
+void floydWarshall(vector<vector<int>>& dist, int V) {
     const int INF = 1e9;
     for (int i = 0; i < V; i++) {
         for (int j = 0; j < V; j++) {
@@ -1387,19 +1443,19 @@ void floydWarshall(std::vector<std::vector<int>>& dist, int V) {
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
                 if (dist[i][k] != INF && dist[k][j] != INF) {
-                    dist[i][j] = std::min(dist[i][j], 
-                                         dist[i][k] + dist[k][j]);
+                    dist[i][j] = min(dist[i][j], 
+                                     dist[i][k] + dist[k][j]);
                 }
             }
         }
     }
-    std::cout << "All-pairs shortest distances:\n";
+    cout << "All-pairs shortest distances:\n";
     for (int i = 0; i < V; i++) {
         for (int j = 0; j < V; j++) {
-            if (dist[i][j] >= INF) std::cout << "INF ";
-            else std::cout << dist[i][j] << " ";
+            if (dist[i][j] >= INF) cout << "INF ";
+            else cout << dist[i][j] << " ";
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 }
 ```
@@ -1431,34 +1487,36 @@ Find longest sequence of characters in same relative order in two strings.
 
 ### Code
 ```cpp
-int lcs(const std::string& a, const std::string& b) {
+using namespace std;
+
+int lcs(const string& a, const string& b) {
     int m = a.length(), n = b.length();
-    std::vector<std::vector<int>> dp(m + 1, std::vector<int>(n + 1, 0));
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
     for (int i = 1; i <= m; i++) {
         for (int j = 1; j <= n; j++) {
             if (a[i-1] == b[j-1]) {
                 dp[i][j] = dp[i-1][j-1] + 1;
             } else {
-                dp[i][j] = std::max(dp[i-1][j], dp[i][j-1]);
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
             }
         }
     }
     return dp[m][n];
 }
 
-std::string lcsFull(const std::string& a, const std::string& b) {
+string lcsFull(const string& a, const string& b) {
     int m = a.length(), n = b.length();
-    std::vector<std::vector<int>> dp(m + 1, std::vector<int>(n + 1, 0));
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
     for (int i = 1; i <= m; i++) {
         for (int j = 1; j <= n; j++) {
             if (a[i-1] == b[j-1]) {
                 dp[i][j] = dp[i-1][j-1] + 1;
             } else {
-                dp[i][j] = std::max(dp[i-1][j], dp[i][j-1]);
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
             }
         }
     }
-    std::string result;
+    string result;
     int i = m, j = n;
     while (i > 0 && j > 0) {
         if (a[i-1] == b[j-1]) {
@@ -1501,9 +1559,11 @@ Find shortest route visiting all cities once and returning to start. NP-hard wit
 
 ### Code
 ```cpp
-int tsp(std::vector<std::vector<int>>& dist, int n) {
+using namespace std;
+
+int tsp(vector<vector<int>>& dist, int n) {
     const int INF = 1e9;
-    std::vector<std::vector<int>> dp(1 << n, std::vector<int>(n, INF));
+    vector<vector<int>> dp(1 << n, vector<int>(n, INF));
     dp[1][0] = 0;
     for (int mask = 1; mask < (1 << n); mask++) {
         for (int i = 0; i < n; i++) {
@@ -1511,21 +1571,21 @@ int tsp(std::vector<std::vector<int>>& dist, int n) {
             for (int j = 0; j < n; j++) {
                 if (mask & (1 << j)) continue;
                 int new_mask = mask | (1 << j);
-                dp[new_mask][j] = std::min(dp[new_mask][j], 
-                                          dp[mask][i] + dist[i][j]);
+                dp[new_mask][j] = min(dp[new_mask][j], 
+                                      dp[mask][i] + dist[i][j]);
             }
         }
     }
     int all_visited = (1 << n) - 1;
     int ans = INF;
     for (int i = 0; i < n; i++) {
-        ans = std::min(ans, dp[all_visited][i] + dist[i][0]);
+        ans = min(ans, dp[all_visited][i] + dist[i][0]);
     }
     return ans;
 }
 
-int greedyTSP(std::vector<std::vector<int>>& dist, int n) {
-    std::vector<bool> visited(n, false);
+int greedyTSP(vector<vector<int>>& dist, int n) {
+    vector<bool> visited(n, false);
     int cost = 0, current = 0;
     visited[0] = true;
     for (int i = 0; i < n - 1; i++) {
@@ -1573,16 +1633,18 @@ Assign colors to vertices such that no adjacent vertices share same color using 
 
 ### Code
 ```cpp
-bool isSafe(int vertex, std::vector<std::vector<int>>& graph, 
-            std::vector<int>& color, int c) {
+using namespace std;
+
+bool isSafe(int vertex, vector<vector<int>>& graph, 
+            vector<int>& color, int c) {
     for (int neighbor : graph[vertex]) {
         if (color[neighbor] == c) return false;
     }
     return true;
 }
 
-bool coloringUtil(int V, std::vector<std::vector<int>>& graph, 
-                  std::vector<int>& color, int numColors, int vertex) {
+bool coloringUtil(int V, vector<vector<int>>& graph, 
+                  vector<int>& color, int numColors, int vertex) {
     if (vertex == V) return true;
     for (int c = 1; c <= numColors; c++) {
         if (isSafe(vertex, graph, color, c)) {
@@ -1595,12 +1657,12 @@ bool coloringUtil(int V, std::vector<std::vector<int>>& graph,
     return false;
 }
 
-bool graphColoring(int V, std::vector<std::vector<int>>& graph, int numColors) {
-    std::vector<int> color(V, 0);
+bool graphColoring(int V, vector<vector<int>>& graph, int numColors) {
+    vector<int> color(V, 0);
     if (coloringUtil(V, graph, color, numColors, 0)) {
-        std::cout << "Colors assigned: ";
-        for (int c : color) std::cout << c << " ";
-        std::cout << "\n";
+        cout << "Colors assigned: ";
+        for (int c : color) cout << c << " ";
+        cout << "\n";
         return true;
     }
     return false;
@@ -1633,8 +1695,10 @@ Find cycle visiting each vertex exactly once using backtracking.
 
 ### Code
 ```cpp
-bool isSafeHam(int v, std::vector<std::vector<int>>& graph,
-               std::vector<int>& path, int pos) {
+using namespace std;
+
+bool isSafeHam(int v, vector<vector<int>>& graph,
+               vector<int>& path, int pos) {
     for (int i = 0; i < pos; i++) {
         if (path[i] == v) return false;
     }
@@ -1648,8 +1712,8 @@ bool isSafeHam(int v, std::vector<std::vector<int>>& graph,
     return found;
 }
 
-bool hamiltonianUtil(std::vector<std::vector<int>>& graph, 
-                     std::vector<int>& path, int pos, int V) {
+bool hamiltonianUtil(vector<vector<int>>& graph, 
+                     vector<int>& path, int pos, int V) {
     if (pos == V) {
         for (int neighbor : graph[path[pos - 1]]) {
             if (neighbor == path[0]) return true;
@@ -1667,13 +1731,13 @@ bool hamiltonianUtil(std::vector<std::vector<int>>& graph,
     return false;
 }
 
-bool hamiltonianCycle(std::vector<std::vector<int>>& graph, int V) {
-    std::vector<int> path(V, -1);
+bool hamiltonianCycle(vector<vector<int>>& graph, int V) {
+    vector<int> path(V, -1);
     path[0] = 0;
     if (hamiltonianUtil(graph, path, 1, V)) {
-        std::cout << "Hamiltonian cycle: ";
-        for (int v : path) std::cout << v << " ";
-        std::cout << "0\n";
+        cout << "Hamiltonian cycle: ";
+        for (int v : path) cout << v << " ";
+        cout << "0\n";
         return true;
     }
     return false;
@@ -1706,19 +1770,21 @@ Place n queens on n×n chessboard such that no two attack using backtracking.
 
 ### Code
 ```cpp
-bool isSafeQueens(std::vector<int>& positions, int row, int col) {
+using namespace std;
+
+bool isSafeQueens(vector<int>& positions, int row, int col) {
     for (int i = 0; i < row; i++) {
         int prevCol = positions[i];
         if (prevCol == col || 
-            std::abs(i - row) == std::abs(prevCol - col)) {
+            abs(i - row) == abs(prevCol - col)) {
             return false;
         }
     }
     return true;
 }
 
-void solveNQueensUtil(int n, std::vector<int>& positions, 
-                      int row, std::vector<std::vector<int>>& solutions) {
+void solveNQueensUtil(int n, vector<int>& positions, 
+                      int row, vector<vector<int>>& solutions) {
     if (row == n) {
         solutions.push_back(positions);
         return;
@@ -1731,14 +1797,14 @@ void solveNQueensUtil(int n, std::vector<int>& positions,
     }
 }
 
-std::vector<std::vector<int>> solveNQueens(int n) {
-    std::vector<int> positions(n, -1);
-    std::vector<std::vector<int>> solutions;
+vector<vector<int>> solveNQueens(int n) {
+    vector<int> positions(n, -1);
+    vector<vector<int>> solutions;
     solveNQueensUtil(n, positions, 0, solutions);
-    std::cout << "Found " << solutions.size() << " solutions for " << n << "-Queens\n";
+    cout << "Found " << solutions.size() << " solutions for " << n << "-Queens\n";
     for (const auto& sol : solutions) {
-        for (int col : sol) std::cout << col << " ";
-        std::cout << "\n";
+        for (int col : sol) cout << col << " ";
+        cout << "\n";
     }
     return solutions;
 }
@@ -1770,9 +1836,11 @@ Find all subsets that sum to target value using backtracking.
 
 ### Code
 ```cpp
-void sumOfSubsets(std::vector<int>& arr, int n, int target, 
-                  std::vector<int>& subset, int idx, int sum,
-                  std::vector<std::vector<int>>& solutions) {
+using namespace std;
+
+void sumOfSubsets(vector<int>& arr, int n, int target, 
+                  vector<int>& subset, int idx, int sum,
+                  vector<vector<int>>& solutions) {
     if (sum == target) {
         solutions.push_back(subset);
         return;
@@ -1784,25 +1852,25 @@ void sumOfSubsets(std::vector<int>& arr, int n, int target,
     sumOfSubsets(arr, n, target, subset, idx + 1, sum, solutions);
 }
 
-std::vector<std::vector<int>> findSubsetSum(std::vector<int> arr, int target) {
-    std::vector<std::vector<int>> solutions;
-    std::vector<int> subset;
+vector<vector<int>> findSubsetSum(vector<int> arr, int target) {
+    vector<vector<int>> solutions;
+    vector<int> subset;
     sumOfSubsets(arr, arr.size(), target, subset, 0, 0, solutions);
-    std::cout << "Subsets summing to " << target << ":\n";
+    cout << "Subsets summing to " << target << ":\n";
     for (const auto& sol : solutions) {
-        std::cout << "[ ";
-        for (int x : sol) std::cout << x << " ";
-        std::cout << "]\n";
+        cout << "[ ";
+        for (int x : sol) cout << x << " ";
+        cout << "]\n";
     }
     return solutions;
 }
 
-std::vector<std::vector<int>> findSubsetSumIter(std::vector<int>& arr, int target) {
-    std::vector<std::vector<int>> solutions;
+vector<vector<int>> findSubsetSumIter(vector<int>& arr, int target) {
+    vector<vector<int>> solutions;
     int n = arr.size();
     for (int mask = 0; mask < (1 << n); mask++) {
         int sum = 0;
-        std::vector<int> subset;
+        vector<int> subset;
         for (int i = 0; i < n; i++) {
             if (mask & (1 << i)) {
                 subset.push_back(arr[i]);
