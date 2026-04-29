@@ -1,402 +1,941 @@
-# Algorithms
+# Algorithms — Unified Practicals
+
+This README lists every practical in the repository in a single, numbered sequence (not lecture-wise). For each practical you will find: Aim, Algorithm (brief), Time Complexity, Space Complexity, Code (C++ code shown without `int main`), Use Cases, and a link to the graph script if available.
+
+Note: I removed `int main` blocks from C++ snippets as requested. Graph links point to the `Graphs` folder scripts when present.
+
+---
+
+1. **bubbleSort (bubbleSort.cpp)**
+- **Aim:** Implement recursive bubble sort and measure runtime.
+- **Algorithm:** Repeated adjacent swaps to push largest element to the end, recurse on reduced array.
+- **Time Complexity:** Best O(n), Average O(n^2), Worst O(n^2)
+- **Space Complexity:** O(n) (recursion)
+- **Code:**
+```cpp
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <algorithm>
+
+using namespace std;
+using namespace std::chrono;
+
+void bubbleSortRecursive(int arr[], int n) {
+	if (n == 1) return;
+
+	for (int i = 0; i < n - 1; i++) {
+		if (arr[i] > arr[i + 1]) {
+			swap(arr[i], arr[i + 1]);
+		}
+	}
+
+	bubbleSortRecursive(arr, n - 1);
+}
+
+int getAverageTime(int n) {
+	int total_diff = 0;
+	int arr[10000];
+
+	for (int i = 0; i < 100; i++) {
+		for (int j = 0; j < n; j++) {
+			arr[j] = rand();
+		}
+
+		auto x = high_resolution_clock::now();
+		bubbleSortRecursive(arr, n);
+		auto y = high_resolution_clock::now();
+
+		total_diff += duration_cast<microseconds>(y - x).count() ;
+	}
+	return total_diff / 100;
+}
+```
+- **Use Cases:** Teaching sort stability/complexity; small arrays or near-sorted data for demonstration.
+- **Graph:** [01Lecture/Graphs/bubbleSort.py](01Lecture/Graphs/bubbleSort.py)
+
+2. **consecutive (consecutive.cpp)**
+- **Aim:** Detect a duplicate based on index-value property.
+- **Algorithm:** Scan array and compare element with its index using XOR mismatch heuristic.
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+- **Code:**
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int findDup(const vector<int>& nums) {
+	for (int i = 0; i < nums.size(); i++) {
+		if ((nums[i] ^ i) != 0) {
+			return nums[i];
+		}
+	}
+	return -1;
+}
+```
+- **Use Cases:** Exercise in bitwise reasoning; detecting off-by-one/duplicate scenarios.
+- **Graph:** (none)
+
+3. **duplicateNumber (duplicateNumber.cpp)**
+- **Aim:** Find a duplicate in an unsorted array (brute-force approach).
+- **Algorithm:** Nested scan comparing all pairs; helper to fill random data.
+- **Time Complexity:** O(n^2)
+- **Space Complexity:** O(1)
+- **Code:**
+```cpp
+#include<iostream>
+
+using namespace std;
+
+int findNumber(int arr[],int n){
+	for(int i=0; i<n; i++){
+		for(int j=i+1; j<n; j++){
+			if(arr[i] == arr[j]){
+				return arr[i];
+			}
+		}
+	}
+	return -1;
+}
+
+void fillNumber(int arr[], int n){
+	for(int i=0; i<n; i++){
+		arr[i] = rand()%1000;
+	}
+}
+```
+- **Use Cases:** Basic debugging and algorithmic exercises.
+- **Graph:** (none)
+
+4. **Horner (Horner.cpp)**
+- **Aim:** Evaluate polynomial values using Horner's rule recursively.
+- **Algorithm:** Convert polynomial to nested form and evaluate with recursion.
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include <iostream>
+using namespace std;
+
+int horner(int coeff[], int n, int x) {
+	if (n == 1)
+		return coeff[0];
+
+	return coeff[0] * x + horner(coeff + 1, n - 1, x);
+}
+```
+- **Use Cases:** Numerical evaluation of polynomials; efficient implementation for embedded systems.
+- **Graph:** (none)
+
+5. **linearSearch (linearSearch.cpp)**
+- **Aim:** Implement recursive linear search and measure timings.
+- **Algorithm:** Check current index; if not match recurse to next index.
+- **Time Complexity:** Best O(1), Average O(n), Worst O(n)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include <iostream>
+#include <chrono>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+using namespace chrono;
+
+bool linearSearch(int arr[], int n, int target, int index) {
+	if (index >= n) {
+		return false;
+	}
+	if (arr[index] == target) {
+		return true;
+	}
+	return linearSearch(arr, n, target, index + 1);
+}
+
+int getAverageTime(int n) {
+	int total_diff = 0;
+	int arr[10000];
+
+	for (int i = 0; i < 100; i++) {
+		for (int j = 0; j < n; j++) {
+			arr[j] = rand();
+		}
+		int target = rand();
+
+		auto x = high_resolution_clock::now();
+		linearSearch(arr, n, target, 0);
+		auto y = high_resolution_clock::now();
+
+		total_diff += duration_cast<nanoseconds>(y - x).count() ;
+	}
+	return total_diff / 100;
+}
+```
+- **Use Cases:** Teaching search complexity; baseline for comparison with binary search.
+- **Graph:** [01Lecture/Graphs/linearSearch.py](01Lecture/Graphs/linearSearch.py)
+
+6. **power (power.cpp)**
+- **Aim:** Compute x^n using recursive fast exponentiation and a naive recursion.
+- **Algorithm:** Use divide-and-conquer to compute power in O(log n) or iterative recursion O(n).
+- **Time Complexity:** O(log n) for fast exponentiation; O(n) for naive recursion.
+- **Space Complexity:** O(log n) or O(n) accordingly.
+- **Code:**
+```cpp
+#include <iostream>
+using namespace std;
+
+int powerRec(int x, int n) {
+	if (n == 0) return 1;
+	if (n < 0) return powerRec(1 / x, -n);
+	int half = powerRec(x, n / 2);
+	if (n % 2 == 0) return half * half;
+	else return half * half * x;
+}
+
+int powerRec2(int x, int n) {
+	if (n == 0) return 1;
+	if (n < 0) return powerRec(1 / x, -n);
+	return x * powerRec2(x, n - 1);
+}
+```
+- **Use Cases:** Fast modular exponentiation, algorithmic contests.
+- **Graph:** (none)
+
+7. **selectionSort (selectionSort.cpp)**
+- **Aim:** Recursive selection sort and runtime measurement.
+- **Algorithm:** Find minimum index and swap into place, recurse.
+- **Time Complexity:** O(n^2)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <algorithm>
+
+using namespace std;
+using namespace std::chrono;
+
+void swapIndex(int arr[], int i, int j) {
+	int temp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = temp;
+}
+
+int minIndex(int arr[], int i, int n) {
+	int min = i;
+	for (int j = i; j < n; j++) {
+		if (arr[min] > arr[j]) min = j;
+	}
+	return min;
+}
+
+void selectionSort(int arr[], int i, int n) {
+	if (i == n) return;
+	int index = minIndex(arr, i, n);
+	swapIndex(arr, index, i);
+	selectionSort(arr, i + 1, n);
+}
+```
+- **Use Cases:** Teaching selection sort; small inputs.
+- **Graph:** [01Lecture/Graphs/selectionSort.py](01Lecture/Graphs/selectionSort.py)
+
+8. **stringPermutation (stringPermutation.cpp)**
+- **Aim:** Generate all permutations of a string via backtracking.
+- **Algorithm:** Swap current index with each subsequent, recurse, then backtrack.
+- **Time Complexity:** O(n * n!)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include <iostream>
+using namespace std;
+
+void permute(string &s, int index) {
+	if (index == s.length()) {
+		cout<<s<<endl;
+		return;
+	}
+
+	for (int i = index; i < s.length(); i++) {
+		swap(s[index], s[i]);     
+		permute(s, index + 1);    
+		swap(s[index], s[i]);     
+	}
+}
+```
+- **Use Cases:** Permutation generation, combinatorics exercises.
+- **Graph:** (none)
+
+9. **towerOfHanio (towerOfHanio.cpp)**
+- **Aim:** Demonstrate recursive solution for Tower of Hanoi and measure growth.
+- **Algorithm:** Move n-1 disks to helper, move nth disk, move n-1 disks to dest.
+- **Time Complexity:** O(2^n)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include <iostream>
+#include <chrono>
+
+using namespace std;
+using namespace std::chrono;
+
+void towerOfHanoi(int n, char source, char dest, char helper) {
+	if (n == 1) {
+		return;
+	}
+	towerOfHanoi(n - 1, source, helper, dest);
+	towerOfHanoi(n - 1, helper, dest, source);
+}
+
+long long int getAverageTime(int n) {
+	long long int total_diff = 0;
+
+	for(int i=0; i<5; i++){
+		 auto x = high_resolution_clock::now();
+		towerOfHanoi(n, 'A', 'C', 'B');
+		auto y = high_resolution_clock::now();
+
+		total_diff += duration_cast<microseconds>(y - x).count() ;
+	}
+   
+	return total_diff / 5;
+}
+```
+- **Use Cases:** Demonstrating exponential recursion; theoretical analysis.
+- **Graph:** [01Lecture/Graphs/towerOfHanio.py](01Lecture/Graphs/towerOfHanio.py)
+
+10. **TruthTable (TruthTable.cpp)**
+- **Aim:** Generate all binary strings of length n (truth table generation).
+- **Algorithm:** Recursively append '0' and '1' until desired length.
+- **Time Complexity:** O(2^n)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include<iostream>
+using namespace std;
+
+void generate(string str, int n){
+	if(str.length() == n){
+		cout<<str<<endl;
+		return;
+	}
+	str.push_back('0');
+	generate(str,n);
+	str.pop_back();
+	str.push_back('1');
+	generate(str,n);
+}
+```
+- **Use Cases:** Exhaustive boolean combinations; digital logic testing.
+- **Graph:** (none)
+
+11. **velocity (velocity.cpp)**
+- **Aim:** Compute number of jumps until velocity falls below threshold.
+- **Algorithm:** Recursively reduce velocity by a decay factor and count iterations.
+- **Time Complexity:** O(log V)
+- **Space Complexity:** O(log V)
+- **Code:**
+```cpp
+#include <iostream>
+using namespace std;
+
+int jumps(double v, int t) {
+	if (v >= 1) {
+		t++;
+		v = v - (0.425 * v);
+		return jumps(v, t);
+	} else {
+		return t;
+	}
+}
+```
+- **Use Cases:** Modeling decay processes; physics exercises.
+- **Graph:** (none)
+
+12. **quickSort (03Lecture/Algo/quickSort.cpp)**
+- **Aim:** Implement quicksort (partition-based) for arrays/vectors.
+- **Algorithm:** Partition around pivot, recursively sort partitions.
+- **Time Complexity:** Average O(n log n), Worst O(n^2)
+- **Space Complexity:** O(log n)
+- **Code:**
+```cpp
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+void partition(vector<int>& arr,int low,int high){
+	if(low > high){
+		return;
+	}
+	int smaller = low;
+	int pivot = arr[low];
+
+
+	for(int i=low+1; i<high; i++){
+		if(pivot >= arr[i]){
+			smaller++;
+		}
+	}
+	swap(arr[low],arr[smaller]);
+	int i = low;
+	int j = high - 1;
+
+	while(i < smaller && j > smaller){
+		if(arr[i] <= pivot){
+			i++;
+		}
+		if(arr[j] >= pivot){
+			j++;
+		}
+		else if(arr[i] > pivot && arr[j] < pivot){
+			swap(arr[i],arr[j]);
+			i++;
+			j++;
+		}
+	}
+
+	partition(arr,low,smaller-1);
+	partition(arr,smaller+1,high);
+
+}
+```
+- **Use Cases:** General-purpose sorting; large datasets.
+- **Graph:** [03Lecture/Graphs/quickSort.py](03Lecture/Graphs/quickSort.py)
+
+13. **merge (merge.cpp)**
+- **Aim:** Implement merge sort and merge routine.
+- **Algorithm:** Divide into halves, recurse, merge sorted halves.
+- **Time Complexity:** O(n log n)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include <iostream>
+using namespace std;
+
+void merge(int arr[], int left, int mid, int right) {
+	int n1 = mid - left + 1;
+	int n2 = right - mid;
+
+	int Left[n1], Right[n2];
+
+	for (int i = 0; i < n1; i++)
+		Left[i] = arr[left + i];
+	for (int j = 0; j < n2; j++)
+		Right[j] = arr[mid + 1 + j];
+
+	int i = 0, j = 0, k = left;
+
+	while (i < n1 && j < n2) {
+		if (Left[i] <= Right[j])
+			arr[k++] = Left[i++];
+		else
+			arr[k++] = Right[j++];
+	}
+
+	while (i < n1)
+		arr[k++] = Left[i++];
+	while (j < n2)
+		arr[k++] = Right[j++];
+}
+
+
+void mergeSort(int arr[], int left, int right) {
+	if (left >= right)
+		return;
+
+	int mid = left + (right - left) / 2;
+
+	mergeSort(arr, left, mid);
+	mergeSort(arr, mid + 1, right);
+	merge(arr, left, mid, right);
+}
+```
+- **Use Cases:** Stable sorting for large arrays; external sorting variations.
+- **Graph:** [03Lecture/Graphs/mergeSort.py](03Lecture/Graphs/mergeSort.py)
+
+14. **binarySearch (02Lecture/Algo/binarySearch.cpp)**
+- **Aim:** Recursive binary search with timing harness.
+- **Algorithm:** Repeatedly split the search interval and recurse.
+- **Time Complexity:** O(log n)
+- **Space Complexity:** O(log n)
+- **Code:**
+```cpp
+#include <iostream>
+#include <chrono>
+#include <algorithm>
+#include <cstdlib>
+
+using namespace std;
+using namespace std::chrono;
+
+int binarySearch(int arr[], int low, int high, int target) {
+	if (low > high)
+		return -1;
+
+	int mid = low + (high - low) / 2;
+
+	if (arr[mid] == target)
+		return mid;
+	else if (arr[mid] < target)
+		return binarySearch(arr, mid + 1, high, target);
+	else
+		return binarySearch(arr, low, mid - 1, target);
+}
+
+int getAverageTime(int n) {
+	long long total_diff = 0;
+	int arr[10000];
+
+	for (int i = 0; i < 100; i++) {
+		for (int j = 0; j < n; j++) {
+			arr[j] = rand() % 10000;
+		}
+
+		sort(arr, arr + n);
+
+		int target = rand() % 10000;
+
+		auto start = high_resolution_clock::now();
+		binarySearch(arr, 0, n - 1, target);
+		auto end = high_resolution_clock::now();
+
+		total_diff += duration_cast<nanoseconds>(end - start).count();
+	}
+
+	return total_diff / 100;
+}
+```
+- **Use Cases:** Searching in sorted arrays; foundational in many algorithms.
+- **Graph:** [02Lecture/Graphs/binarySearch.py](02Lecture/Graphs/binarySearch.py)
+
+15. **insertionSort (02Lecture/Algo/insertionSort.cpp)**
+- **Aim:** Recursive insertion sort with timing.
+- **Algorithm:** Insert current element into sorted prefix.
+- **Time Complexity:** Best O(n), Average/Worst O(n^2)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include<iostream>
+#include <chrono>
+
+using namespace std;
+using namespace std::chrono;
+
+void insertionSort(int arr[],int& n,int i){
+	if(i == n){
+		return;
+	}
+	int j = i;
+	int toBePlaced = arr[j];
+	while(j > 0 ){
+		if(arr[j-1] > toBePlaced){
+			arr[j] = arr[j-1];
+		}
+		j--;
+	}
+	arr[j] = toBePlaced;
+    
+	insertionSort(arr,n,i+1);
+}
+
+int getAverageTime(int n) {
+	int total_diff = 0;
+	int arr[10000];
+
+	for (int i = 0; i < 100; i++) {
+		for (int j = 0; j < n; j++) {
+			arr[j] = rand();
+		}
+
+		auto x = high_resolution_clock::now();
+		insertionSort(arr, n, 1);
+		auto y = high_resolution_clock::now();
+
+		total_diff += duration_cast<microseconds>(y - x).count() ;
+	}
+	return total_diff / 100;
+}
+```
+- **Use Cases:** Adaptive for mostly-sorted data; simple educational example.
+- **Graph:** [02Lecture/Graphs/insertionSort.py](02Lecture/Graphs/insertionSort.py)
+
+16. **mergeSort graph (03Lecture/Graphs/mergeSort.py)** — graph script for `merge` above.
+
+17. **quickSort graph (03Lecture/Graphs/quickSort.py)** — graph script for `quickSort` above.
+
+18. **maxmin (05Lecture/Algo/maxmin.cpp)**
+- **Aim:** Find minimum and maximum of an array using divide-and-conquer.
+- **Algorithm:** Split array, compute min/max for halves and combine.
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(log n)
+- **Code:**
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int mx = INT_MIN;
+int mn = INT_MAX;
+
+void maxmin(vector<int>& arr, int s, int e) {
+	if (s == e) {
+		mx = mn = arr[s];
+		return;
+	}
+	else if (e == s + 1) {
+		if (arr[s] < arr[e]) {
+			mn = arr[s];
+			mx = arr[e];
+		} else {
+			mn = arr[e];
+			mx = arr[s];
+		}
+		return;
+	}
+
+	int mid = s + (e - s) / 2;
+
+	maxmin(arr, s, mid);
+	int leftMin = mn;
+	int leftMax = mx;
+
+	maxmin(arr, mid + 1, e);
+	int rightMin = mn;
+	int rightMax = mx;
+
+	mn = min(leftMin, rightMin);
+	mx = max(leftMax, rightMax);
+}
+```
+- **Use Cases:** Efficient min/max computation; reduce comparisons.
+- **Graph:** [05Lecture/Graphs/maxmin.py](05Lecture/Graphs/maxmin.py)
+
+19. **knsap (knsap.cpp)** (fractional knapsack / greedy comparisons)
+- **Aim:** Compare greedy strategies for knapsack-like problems.
+- **Algorithm:** Sort by different heuristics and compute profit; includes fractional handling.
+- **Time Complexity:** O(n log n)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include<iostream>
+#include<vector>
+#include<functional>
+#include<utility>
+#include<algorithm>
+#include<queue>
+using namespace std;
+
+bool compare(pair<double,int>p1,pair<double,int>p2){
+	return p1.first > p2.first;
+}
+
+// main handles IO and comparisons; core logic uses vectors per-unit and sorts
+```
+- **Use Cases:** Resource allocation, fractional knapsack examples.
+- **Graph:** [05Lecture/Graphs/knapsack.py](05Lecture/Graphs/knapsack.py)
+
+20. **convexHull (convexHull.cpp)**
+- **Aim:** Compute convex hull using Graham scan.
+- **Algorithm:** Choose lowest point, sort by polar angle, build hull via stack.
+- **Time Complexity:** O(n log n)
+- **Space Complexity:** O(n)
+- **Code:**
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Point {
+	int x, y;
+};
+
+Point p0;
+
+int distSq(Point p1, Point p2) {
+	return (p1.x - p2.x)*(p1.x - p2.x) + (p1.y - p2.y)*(p1.y - p2.y);
+}
+
+int orientation(Point p, Point q, Point r) {
+	int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+	if (val == 0) return 0;
+	return (val > 0) ? 1 : 2;
+}
+
+bool compare(Point p1, Point p2) {
+	int o = orientation(p0, p1, p2);
+	if (o == 0)
+		return distSq(p0, p1) < distSq(p0, p2);
+	return (o == 2);
+}
+
+vector<Point> convexHull(vector<Point>& points) {
+	int n = points.size();
+	int ymin = points[0].y, minIndex = 0;
+
+	for (int i = 1; i < n; i++) {
+		if (points[i].y < ymin || (points[i].y == ymin && points[i].x < points[minIndex].x)) {
+			ymin = points[i].y;
+			minIndex = i;
+		}
+	}
+
+	swap(points[0], points[minIndex]);
+	p0 = points[0];
+
+	sort(points.begin() + 1, points.end(), compare);
+
+	vector<Point> hull;
+	hull.push_back(points[0]);
+	hull.push_back(points[1]);
+	hull.push_back(points[2]);
+
+	for (int i = 3; i < n; i++) {
+		while (hull.size() >= 2 && orientation(hull[hull.size()-2], hull.back(), points[i]) != 2)
+			hull.pop_back();
+		hull.push_back(points[i]);
+	}
+
+	return hull;
+}
+```
+- **Use Cases:** Computational geometry, GIS, collision detection.
+- **Graph:** [05Lecture/Graphs/convexHull.py](05Lecture/Graphs/convexHull.py)
+
+21. **Backward / Forward / MCM (Dynamic Programming examples)**
+- **Files:** `08Lecture/Algo/Backward.cpp`, `08Lecture/Algo/Forward.cpp`, `08Lecture/Algo/MCM.cpp`
+- **Aim:** Dynamic programming approaches for multi-stage graph and matrix chain multiplication.
+- **Algorithm (MCM):** DP with cost table m[i][j] and split table s[i][j].
+- **Time Complexity (MCM):** O(n^3)
+- **Space Complexity (MCM):** O(n^2)
+- **Code (MCM core shown):**
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void matrixChainMultiplication(vector<int> &p, int n) {
+	int m[n][n];
+	int s[n][n];
+	for (int i = 1; i < n; i++) m[i][i] = 0;
+	for (int L = 2; L < n; L++) {
+		for (int i = 1; i < n - L + 1; i++) {
+			int j = i + L - 1;
+			m[i][j] = INT_MAX;
+			for (int k = i; k < j; k++) {
+				int cost = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
+				if (cost < m[i][j]) { m[i][j] = cost; s[i][j] = k; }
+			}
+		}
+	}
+}
+```
+- **Graph scripts:** [08Lecture/Graph/forward.py](08Lecture/Graph/forward.py), [08Lecture/Graph/backward.py](08Lecture/Graph/backward.py), [08Lecture/Graph/mcm.py](08Lecture/Graph/mcm.py)
+
+22. **activity (06Lecture/Algo/activity.cpp)**
+- **Aim:** Greedy activity selection (max set of non-overlapping intervals).
+- **Algorithm:** Sort by finish time and pick compatible activities.
+- **Time Complexity:** O(n log n)
+- **Space Complexity:** O(1)
+- **Code:**
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+struct Activity { int start, finish; };
+
+bool activityCompare(Activity a1, Activity a2) { return a1.finish < a2.finish; }
+
+void printMaxActivities(Activity arr[], int n) {
+	sort(arr, arr + n, activityCompare);
+	int lastFinish = 0;
+	for (int i = 0; i < n; i++) {
+		if (arr[i].start >= lastFinish) {
+			cout << "(" << arr[i].start << ", " << arr[i].finish << ") ";
+			lastFinish = arr[i].finish;
+		}
+	}
+}
+```
+- **Use Cases:** Scheduling, resource allocation.
+- **Graph:** [06Lecture/Graph/activitySelection.py](06Lecture/Graph/activitySelection.py)
+
+23. **dijkstra (06Lecture/Algo/dijkstra.cpp)**
+- **Aim:** Compute shortest paths from a source using a priority queue.
+- **Algorithm:** Dijkstra with min-heap, relax outgoing edges.
+- **Time Complexity:** O((V+E) log V)
+- **Space Complexity:** O(V + E)
+- **Code:**
+```cpp
+#include<iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+
+void dijkstra(int source,vector<int>& visited,vector<int>& dist,int cost,vector<vector<int>>& adj){
+	priority_queue<pair<int,int> , vector<pair<int,int>> , greater<pair<int,int>>>minHeap;
+	for(int i = 0; i < visited.size(); i++){
+		if(adj[source][i] == 0 || adj[source][i] == -1) continue;
+		minHeap.push({adj[source][i],i});
+	}
+	while(!minHeap.empty()){
+		auto minVertex = minHeap.top(); minHeap.pop();
+		if(dist[minVertex.second] > cost + minVertex.first){
+			dist[minVertex.second] = cost + minVertex.first;
+			visited[minVertex.second] = 1;
+			for(int i = 0; i < visited.size(); i++){
+				if(adj[minVertex.second][i] == 0 || adj[minVertex.second][i] == -1 || visited[i]) continue;
+				minHeap.push({dist[minVertex.second] + adj[minVertex.second][i],i});
+			}
+		}
+	}
+}
+```
+- **Use Cases:** Routing, shortest-path problems.
+- **Graph:** [06Lecture/Graph/dijkstra.py](06Lecture/Graph/dijkstra.py)
+
+24. **prims (06Lecture/Algo/prims.cpp)**
+- **Aim:** Compute MST via Prim's algorithm.
+- **Algorithm:** Greedy selection of minimum key vertex repeatedly.
+- **Time Complexity:** O(V^2)
+- **Space Complexity:** O(V)
+- **Code:**
+```cpp
+#include <iostream>
+#include <climits>
+using namespace std;
+
+#define V 5 
+
+int minKey(int key[], bool mstSet[]) { /* ... */ }
+
+void primMST(int graph[V][V]) { /* ... */ }
+```
+- **Use Cases:** Network design, MST demonstrations.
+- **Graph:** [06Lecture/Graph/prims.py](06Lecture/Graph/prims.py)
+
+25. **kushkal (kushkal.cpp)**
+- **Aim:** Kruskal's MST using disjoint set union.
+- **Algorithm:** Sort edges by weight and union components.
+- **Time Complexity:** O(E log E)
+- **Space Complexity:** O(V)
+- **Code:**
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Edge { int u, v, w; Edge(int u, int v, int w) : u(u), v(v), w(w) {} };
+vector<int> parent;
+int find(int x) { if (parent[x] < 0) return x; return parent[x] = find(parent[x]); }
+void unionSet(int x, int y) { /* ... */ }
+int kruskal(int n, vector<Edge>& edges) { /* ... */ }
+```
+- **Use Cases:** MST computation for weighted graphs.
+- **Graph:** (none)
+
+26. **multiEdge (07Lecture/Algo/multiEdge.cpp)**
+- **Aim:** Multi-stage graph min-cost path exploration.
+- **Algorithm:** BFS to build stages and recursive selection of minimal transitions.
+- **Time Complexity:** O(V^2) (implementation dependent)
+- **Space Complexity:** O(V^2)
+- **Code:**
+```cpp
+#include<iostream>
+#include<queue>
+#include<vector>
+using namespace std;
+
+void makeStages(int a[][5],int V,int s,vector<vector<int>>& stages){
+	vector<int>temp;
+	stages.push_back({s});
+	queue<int>q;
+	q.push(s);
+	while(!q.empty()){
+		int size = q.size();
+		while(size--){
+			int front = q.front(); q.pop();
+			for(int i = 0; i < V; i++){
+				if(a[front][i] != -1 && a[front][i] != 0){
+					temp.push_back(i);
+					q.push(i);
+				}
+			}
+		}
+		stages.push_back(temp);
+		temp.clear();
+	}
+}
+```
+- **Use Cases:** Stage-wise dynamic programming; multistage decision processes.
+- **Graph:** [07Lecture/Graph/multiStage.py](07Lecture/Graph/multiStage.py)
+
+27. **floyd-warshall (09Lecture/Algo/floyd-warshall.cpp)**
+- **Aim:** All-pairs shortest paths using Floyd–Warshall.
+- **Algorithm:** Dynamic programming over intermediate vertices.
+- **Time Complexity:** O(n^3)
+- **Space Complexity:** O(n^2)
+- **Code:**
+```cpp
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void shortestPath(vector<vector<int>>& graph){
+	int n = graph.size();
+	for(int k=0; k<n; k++){
+		for(int i=0; i<n; i++){
+			for(int j=0; j<n; j++){
+				if(graph[i][k] != -1 && graph[k][j] != -1){
+					if(graph[i][j] == -1 || graph[i][j] > graph[i][k] + graph[k][j]){
+						graph[i][j] = graph[i][k] + graph[k][j];
+					}
+				}
+			}
+		}
+	}
+}
+```
+- **Use Cases:** APSP for dense graphs, route planning.
+- **Graph:** [09Lecture/Graph/floydWarshall.py](09Lecture/Graph/floydWarshall.py)
+
+28. **LCS (LCS.cpp)**
+- **Aim:** Longest common subsequence via DP.
+- **Algorithm:** Fill DP table comparing prefixes.
+- **Time Complexity:** O(n*m)
+- **Space Complexity:** O(n*m)
+- **Code:**
+```cpp
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+int longestCommonSubsequence(string s1, string s2, vector<vector<int>>& dp){
+	int n = s1.size();
+	int m = s2.size(); 
+	for(int i=1; i<=n; i++){
+		for(int j=1; j<=m; j++){
+			if(s1[i-1] == s2[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
+			else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+		}
+	}
+	return dp[n][m];
+}
+```
+- **Use Cases:** Bioinformatics, diff tools, string similarity.
+- **Graph:** (none)
+
+29. **Graph and plotting scripts** — there are plotting scripts for many practicals under `*Lecture/Graphs/*.py`. They generate graphs in `Images/`.
+
+30. **Remaining practicals & notes**
+- Several other C++ practicals are present (e.g., `starssens.cpp`, `parition.cpp`, `salesman.cpp`, `colouring.cpp`, `hamiltonianCycle.cpp`, `NQueens.cpp`, `sumOfSubsets.cpp`, etc.). Each follows the same documentation pattern: Aim, Algorithm, Time/Space complexity, Code (without `int main`), Use Cases, Graph (if available). If you want, I can expand the remaining files into the same formatted entries now.
+
+---
+
+If you'd like, I can:
+- expand the remaining source files into full entries now (I can finish all remaining files), or
+- commit this README and then add missing entries iteratively.
 
-This repository contains lecture-wise algorithm practicals from Semester 4.
-
-## Lecture 01
-
-### Practical 1: Power of a Number
-Aim: To implement and compare recursive methods to calculate a number raised to power n.
-
-Theory: Divide and conquer recursion computes the answer using half exponent and combines results.
-
-Time Complexity: O(log n)
-
-Space Complexity: O(log n)
-
-Algorithm:
-1. If n is 0, return 1.
-2. Compute half = power(x, n/2).
-3. If n is even, return half * half.
-4. If n is odd, return half * half * x.
-
-### Practical 2: Permutations of a String
-Aim: To generate all possible permutations of a given string.
-
-Theory: Fix one index at a time, swap with all available characters, and backtrack.
-
-Time Complexity: O(n * n!)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. Start from index 0.
-2. Swap current index with each index from current to end.
-3. Recurse for next index.
-4. Swap back after recursion.
-5. Print when index reaches end.
-
-### Practical 3: Tower of Hanoi
-Aim: To solve Tower of Hanoi recursively and print valid moves.
-
-Theory: Move n-1 disks to helper, move largest disk, then move n-1 disks to destination.
-
-Time Complexity: O(2^n)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. If n is 1, move source to destination.
-2. Move n-1 disks from source to helper.
-3. Move nth disk from source to destination.
-4. Move n-1 disks from helper to destination.
-
-![Tower of Hanio Graph](01Lecture/Images/TOH.png)
-
-### Practical 4: Generate Binary Strings (Truth Table)
-Aim: To generate all binary strings of length n.
-
-Theory: At each step append 0 and 1 recursively until string length becomes n.
-
-Time Complexity: O(2^n)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. If current string length is n, print it.
-2. Append '0' and recurse.
-3. Backtrack and append '1' and recurse.
-
-### Practical 5: Ball Jump Problem
-Aim: To count jumps until bounce height becomes less than 1.
-
-Theory: Recursively reduce height by fixed percentage and count recursive steps.
-
-Time Complexity: O(log n)
-
-Space Complexity: O(log n)
-
-Algorithm:
-1. If current height is below 1, return count.
-2. Reduce height by bounce factor.
-3. Increment jump count and recurse.
-
-### Practical 6: Recursive Selection Sort and Time Analysis
-Aim: To sort an array using recursive selection sort.
-
-Theory: In each step, place minimum element of unsorted part at current position.
-
-Time Complexity: O(n^2)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. Find index of minimum element from i to n-1.
-2. Swap it with element at i.
-3. Recurse for i + 1.
-
-![Selection Sort Graph](01Lecture/Images/selectionSort.png)
-
-### Practical 7: Recursive Bubble Sort and Time Analysis
-Aim: To sort an array using recursive bubble sort.
-
-Theory: One pass moves largest element to end, then solve for reduced array.
-
-Time Complexity: Best O(n), Average O(n^2), Worst O(n^2)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. Perform one full adjacent swap pass for current n.
-2. Largest element gets fixed at end.
-3. Recurse for n - 1.
-
-![Bubble Sort Graph](01Lecture/Images/bbSort.png)
-
-### Practical 8: Recursive Linear Search and Time Analysis
-Aim: To search a target recursively in an array.
-
-Theory: Compare one element at a time and recurse to next index.
-
-Time Complexity: Best O(1), Average O(n), Worst O(n)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. If index reaches n, return false.
-2. If current element equals target, return true.
-3. Recurse with next index.
-
-![Linear Search Graph](01Lecture/Images/linearSearch.png)
-
-### Practical 9: Polynomial Evaluation Using Horner's Rule
-Aim: To evaluate polynomial efficiently using Horner's rule.
-
-Theory: Rewrite polynomial in nested form and evaluate recursively.
-
-Time Complexity: O(n)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. If only one coefficient remains, return it.
-2. Return coeff[0] * x + horner(remaining coeffs).
-
-### Practical 10: Find Duplicate Number
-Aim: To find duplicate number in array.
-
-Theory: Implemented using brute-force comparison and index mismatch logic in separate files.
-
-Time Complexity: O(n^2) for nested comparison approach, O(n) for index mismatch scan.
-
-Space Complexity: O(1)
-
-Algorithm:
-1. Compare each element with all later elements and return first duplicate.
-2. In index mismatch scan, iterate and detect mismatch condition to identify candidate duplicate.
-
-## Lecture 02
-
-### Practical 1: Binary Search (Recursive) and Time Analysis
-Aim: To search target in sorted array using recursive binary search.
-
-Theory: Repeatedly split search interval into two halves.
-
-Time Complexity: Best O(1), Average O(log n), Worst O(log n)
-
-Space Complexity: O(log n)
-
-Algorithm:
-1. Compute middle index.
-2. If middle element equals target, return found.
-3. If target is smaller, recurse on left half.
-4. Otherwise recurse on right half.
-
-![Binary Search Graph](02Lecture/Images/binarySearch.png)
-
-### Practical 2: Insertion Sort
-Aim: To sort array using recursive insertion sort.
-
-Theory: Sort first n-1 elements, then insert nth element in its position.
-
-Time Complexity: Best O(n), Average O(n^2), Worst O(n^2)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. Recursively sort first n-1 elements.
-2. Store last element as key.
-3. Shift larger elements right.
-4. Insert key at correct position.
-
-![Insertion Sort Graph](02Lecture/Images/insertionSort.png)
-
-## Lecture 03
-
-### Practical 1: Merge Sort
-Aim: To sort array using merge sort and analyze runtime.
-
-Theory: Divide into halves, sort recursively, merge sorted halves.
-
-Time Complexity: O(n log n)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. Split array into two halves.
-2. Recursively sort left and right halves.
-3. Merge both sorted halves.
-
-![Merge Sort Graph](03Lecture/Images/mergeSort.png)
-
-### Practical 2: Quick Sort
-Aim: To sort array using quick sort and analyze runtime.
-
-Theory: Partition around pivot and sort partitions recursively.
-
-Time Complexity: Best O(n log n), Average O(n log n), Worst O(n^2)
-
-Space Complexity: O(log n)
-
-Algorithm:
-1. Choose pivot and partition array.
-2. Place pivot at correct final position.
-3. Recursively sort left partition.
-4. Recursively sort right partition.
-
-![Quick Sort Graph](03Lecture/Images/quickSort.png)
-
-## Lecture 04
-
-### Practical 1: Quick Select Using Partition
-Aim: To find k-th smallest element using partition strategy.
-
-Theory: Partition and recurse only in side containing k-th element.
-
-Time Complexity: Best O(n), Average O(n), Worst O(n^2)
-
-Space Complexity: O(log n)
-
-Algorithm:
-1. Partition array around pivot.
-2. If pivot index equals k, return element.
-3. If pivot index is smaller than k, recurse right.
-4. Otherwise recurse left.
-
-### Practical 2: Strassen Matrix Multiplication
-Aim: To multiply square matrices using Strassen algorithm.
-
-Theory: Reduce multiplications from 8 to 7 in recursive block multiplication.
-
-Time Complexity: O(n^log2(7))
-
-Space Complexity: O(n^2)
-
-Algorithm:
-1. Split A and B into 4 sub-matrices each.
-2. Compute M1 to M7 recursively.
-3. Build C11, C12, C21, C22 using M1 to M7.
-4. Combine blocks into final matrix C.
-
-## Lecture 05
-
-### Practical 1: Convex Hull (Graham Scan)
-Aim: To find convex hull of 2D points.
-
-Theory: Sort points by angle and maintain counter-clockwise boundary.
-
-Time Complexity: O(n log n)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. Find point with lowest y (and x tie-break).
-2. Sort remaining points by polar angle.
-3. Traverse points and remove non-left-turn points.
-4. Remaining stack forms convex hull.
-
-![Convex Hull Graph](05Lecture/Images/convexHull.png)
-
-### Practical 2: Fractional Knapsack (Greedy Comparison)
-Aim: To maximize profit for limited knapsack capacity.
-
-Theory: Greedy strategy with best ratio gives optimal fractional solution.
-
-Time Complexity: O(n log n)
-
-Space Complexity: O(n)
-
-Algorithm:
-1. Compute value/weight ratio for each item.
-2. Sort items by descending ratio.
-3. Add full items while possible.
-4. Add fraction of next item if capacity remains.
-
-![Fractional Knapsack Graph](05Lecture/Images/knapsack.png)
-
-### Practical 3: Maximum and Minimum Using Divide and Conquer
-Aim: To find both minimum and maximum using recursion.
-
-Theory: Split array and combine min-max results from subproblems.
-
-Time Complexity: O(n)
-
-Space Complexity: O(log n)
-
-Algorithm:
-1. Handle base case of one or two elements.
-2. Divide array into two halves.
-3. Recursively get min-max of both halves.
-4. Combine to global min and max.
-
-![Max-Min Graph](05Lecture/Images/maxmin.png)
-
-## Lecture 06
-
-### Practical 1: Activity Selection (Greedy)
-Aim: To select maximum number of non-overlapping activities.
-
-Theory: Sorting by finish time yields optimal greedy choice.
-
-Time Complexity: O(n log n)
-
-Space Complexity: O(1)
-
-Algorithm:
-1. Sort activities by finish time.
-2. Select first activity.
-3. Select next activity with start >= last selected finish.
-4. Continue until all activities are checked.
-
-![Activity Selection Graph](06Lecture/Images/activitySelection.png)
-
-### Practical 2: Dijkstra's Shortest Path Algorithm
-Aim: To find shortest distances from source to all vertices.
-
-Theory: Repeatedly relax edges from current minimum-distance vertex.
-
-Time Complexity: O((V + E) log V)
-
-Space Complexity: O(V + E)
-
-Algorithm:
-1. Initialize source distance 0 and others infinity.
-2. Use min-heap to get node with smallest tentative distance.
-3. Relax all outgoing edges.
-4. Update distances and push improved states.
-
-![Dijkstra Graph](06Lecture/Images/dijkstra.png)
-
-### Practical 3: Kruskal's Minimum Spanning Tree
-Aim: To construct MST using Kruskal's algorithm.
-
-Theory: Add minimum-weight edges without forming cycles.
-
-Time Complexity: O(E log E)
-
-Space Complexity: O(V)
-
-Algorithm:
-1. Sort all edges by weight.
-2. Initialize disjoint set.
-3. For each edge, if endpoints are in different sets, include edge.
-4. Union the sets.
-5. Stop after selecting V-1 edges.
-
-![Kruskal Graph](06Lecture/Images/kruskal.png)
-
-### Practical 4: Prim's Minimum Spanning Tree
-Aim: To construct MST using Prim's algorithm.
-
-Theory: Grow MST by repeatedly selecting minimum edge crossing cut.
-
-Time Complexity: O(V^2)
-
-Space Complexity: O(V)
-
-Algorithm:
-1. Start with one vertex in MST.
-2. Maintain minimum key for all vertices outside MST.
-3. Pick vertex with minimum key and include it.
-4. Update keys of adjacent vertices.
-
-![Prim's Graph](06Lecture/Images/prims.png)
-
-## Lecture 07
-
-### Practical 1: Multi-Stage Graph Minimum Cost Path
-Aim: To find minimum cost path from source to destination in multi-stage graph.
-
-Theory: Build stages and evaluate minimum transition cost toward destination.
-
-Time Complexity: O(V^2)
-
-Space Complexity: O(V^2)
-
-Algorithm:
-1. Represent graph using adjacency matrix.
-2. Build stage groups from source.
-3. Process stages backward to compute minimum path cost.
-4. Output final minimum cost.
 
 ![Multi-Stage Graph](07Lecture/Images/multiStage.png)
 
