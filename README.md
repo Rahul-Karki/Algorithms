@@ -2,54 +2,6 @@
 
 A comprehensive collection of algorithms across 11 lectures, covering recursion, sorting, searching, divide-and-conquer, greedy algorithms, graph algorithms, dynamic programming, and backtracking.
 
----
-
-## 📚 Lectures Overview
-
-| Lecture | Topics | Count |
-|---------|--------|-------|
-| 01 | Recursion & Basic Algorithms | 11 |
-| 02 | Binary Search & Insertion Sort | 2 |
-| 03 | Merge & Quick Sort | 2 |
-| 04 | Quick Select & Strassen | 2 |
-| 05 | Convex Hull, Knapsack, MaxMin | 3 |
-| 06 | Activity Selection, Dijkstra, Kruskal, Prims | 4 |
-| 07 | Multi-Stage Graphs | 1 |
-| 08 | Forward/Backward DP, Matrix Chain | 3 |
-| 09 | Floyd-Warshall, LCS | 2 |
-| 10 | Travelling Salesman Problem | 1 |
-| 11 | Graph Coloring, Hamiltonian, N-Queens, Subsets | 4 |
-
----
-
-## 🖼️ Featured Graphs
-
-| Practical | Image |
-|-----------|-------|
-| Bubble Sort | ![Bubble Sort](01Lecture/Images/bbSort.png) |
-| Linear Search | ![Linear Search](01Lecture/Images/linearSearch.png) |
-| Selection Sort | ![Selection Sort](01Lecture/Images/selectionSort.png) |
-| Tower of Hanoi | ![Tower of Hanoi](01Lecture/Images/TOH.png) |
-| Binary Search | ![Binary Search](02Lecture/Images/binarySearch.png) |
-| Insertion Sort | ![Insertion Sort](02Lecture/Images/insertionSort.png) |
-| Merge Sort | ![Merge Sort](03Lecture/Images/mergeSort.png) |
-| Quick Sort | ![Quick Sort](03Lecture/Images/quickSort.png) |
-| Convex Hull | ![Convex Hull](05Lecture/Images/convexHull.png) |
-| Fractional Knapsack | ![Fractional Knapsack](05Lecture/Images/knapsack.png) |
-| Max-Min | ![Max-Min](05Lecture/Images/maxmin.png) |
-| Activity Selection | ![Activity Selection](06Lecture/Images/activitySelection.png) |
-| Dijkstra | ![Dijkstra](06Lecture/Images/dijkstra.png) |
-| Kruskal's MST | ![Kruskal's MST](06Lecture/Images/kruskal.png) |
-| Prim's MST | ![Prim's MST](06Lecture/Images/prims.png) |
-| Multi-Stage Graph | ![Multi-Stage Graph](07Lecture/Images/multiStage.png) |
-| Forward DP | ![Forward DP](08Lecture/Images/forward.png) |
-| Backward DP | ![Backward DP](08Lecture/Images/backward.png) |
-| Matrix Chain Multiplication | ![Matrix Chain Multiplication](08Lecture/Images/mcm.png) |
-| Floyd-Warshall | ![Floyd-Warshall](09Lecture/Images/floydWarshall.png) |
-
----
-
-# 📖 LECTURE 01: RECURSION & BASIC ALGORITHMS
 
 ## **1. Power of a Number**
 
@@ -487,7 +439,6 @@ int jumpsIterative(double v) {
 
 ---
 
-# 📖 LECTURE 02: DIVIDE & CONQUER SEARCHING
 
 ## **12. Binary Search**
 
@@ -571,8 +522,6 @@ void insertionSort(int arr[], int n) {
 ![Insertion Sort Performance](02Lecture/Images/insertionSort.png)
 
 ---
-
-# 📖 LECTURE 03: MERGE SORT & QUICK SORT
 
 ## **14. Merge Sort**
 
@@ -683,7 +632,6 @@ void quickSort(int arr[], int low, int high) {
 
 ---
 
-# 📖 LECTURE 04: PARTITION & ADVANCED DIVIDE-CONQUER
 
 ## **16. Quick Select (k-th Smallest)**
 
@@ -782,9 +730,7 @@ void strassen(int A[][2], int B[][2], int C[][2]) {
 
 ---
 
-# 📖 LECTURE 05: GREEDY ALGORITHMS
-
-## **18. Convex Hull (Graham Scan)**
+## **18. Convex Hull **
 
 ### Aim
 Find smallest convex polygon containing point set using polar angle sorting.
@@ -961,9 +907,6 @@ MinMax minMax(int arr[], int low, int high) {
 
 ![Max-Min Visualization](05Lecture/Images/maxmin.png)
 
----
-
-# 📖 LECTURE 06: GRAPH ALGORITHMS - MST & SHORTEST PATH
 
 ## **21. Activity Selection (Greedy)**
 
@@ -1194,7 +1137,6 @@ int primMST(int graph[][5], int V) {
 
 ---
 
-# 📖 LECTURE 07: MULTI-STAGE GRAPHS
 
 ## **25. Multi-Stage Graph Minimum Cost**
 
@@ -1246,9 +1188,7 @@ void findMinCostPath(vector<vector<int>>& cost, int n) {
 
 ![Multi-Stage Graph Visualization](07Lecture/Images/multiStage.png)
 
----
 
-# 📖 LECTURE 08: DYNAMIC PROGRAMMING
 
 ## **26. Forward Approach (Multi-Stage DP)**
 
@@ -1410,8 +1350,6 @@ void matrixChainOrder(vector<int>& p) {
 
 ---
 
-# 📖 LECTURE 09: ALL-PAIRS & STRING ALGORITHMS
-
 ## **29. Floyd-Warshall (All-Pairs Shortest Path)**
 
 ### Aim
@@ -1537,9 +1475,6 @@ string lcsFull(const string& a, const string& b) {
 - DNA sequence alignment
 - Spell checking
 
----
-
-# 📖 LECTURE 10: OPTIMIZATION PROBLEMS
 
 ## **31. Travelling Salesman Problem (TSP)**
 
@@ -1610,9 +1545,6 @@ int greedyTSP(vector<vector<int>>& dist, int n) {
 - Robot motion planning
 - Circuit design
 
----
-
-# 📖 LECTURE 11: BACKTRACKING PROBLEMS
 
 ## **32. Graph Coloring**
 
@@ -1815,6 +1747,8 @@ vector<vector<int>> solveNQueens(int n) {
 - Puzzle games
 - Constraint optimization
 
+![N-Queens Time Complexity](11Lecture/Images/NQueens.png)
+
 ---
 
 ## **35. Sum of Subsets**
@@ -1890,6 +1824,82 @@ vector<vector<int>> findSubsetSumIter(vector<int>& arr, int target) {
 - Partition problems
 - Coin change
 - Resource allocation
+
+![Sum of Subsets Time Complexity](11Lecture/Images/sumOfSubsets.png)
+
+---
+
+## **36. 0/1 Knapsack Problem**
+
+### Aim
+Maximize value of items in knapsack with weight capacity constraint using dynamic programming.
+
+### Algorithm
+1. Create DP table dp[i][w] where i is item count and w is capacity
+2. For each item, decide include or exclude based on maximum value
+3. If item weight ≤ remaining capacity, compute max of including/excluding
+4. Return dp[n][capacity]
+
+### Time Complexity
+- O(n × W) where n is items and W is capacity
+
+### Space Complexity
+- O(n × W) for DP table
+
+### Code
+```cpp
+using namespace std;
+
+int knapsack01(vector<int>& weights, vector<int>& values, int capacity) {
+    int n = weights.size();
+    vector<vector<int>> dp(n + 1, vector<int>(capacity + 1, 0));
+    
+    for (int i = 1; i <= n; i++) {
+        for (int w = 1; w <= capacity; w++) {
+            if (weights[i - 1] <= w) {
+                dp[i][w] = max(values[i - 1] + dp[i - 1][w - weights[i - 1]], 
+                               dp[i - 1][w]);
+            } else {
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+    return dp[n][capacity];
+}
+
+void findItemsIncluded(vector<int>& weights, vector<int>& values, int capacity) {
+    int n = weights.size();
+    vector<vector<int>> dp(n + 1, vector<int>(capacity + 1, 0));
+    
+    for (int i = 1; i <= n; i++) {
+        for (int w = 1; w <= capacity; w++) {
+            if (weights[i - 1] <= w) {
+                dp[i][w] = max(values[i - 1] + dp[i - 1][w - weights[i - 1]], 
+                               dp[i - 1][w]);
+            } else {
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+    
+    cout << "Items included:\n";
+    int w = capacity;
+    for (int i = n; i > 0 && w > 0; i--) {
+        if (dp[i][w] != dp[i - 1][w]) {
+            cout << "Item " << i << ": Weight = " << weights[i - 1] 
+                 << ", Value = " << values[i - 1] << "\n";
+            w -= weights[i - 1];
+        }
+    }
+}
+```
+
+### Use Cases
+- Resource allocation
+- Cargo loading
+- Portfolio optimization
+- Inventory management
+- Memory allocation
 
 ---
 
