@@ -1,8 +1,3 @@
-# 🎯 Complete Algorithms Reference
-
-A comprehensive collection of algorithms across 11 lectures, covering recursion, sorting, searching, divide-and-conquer, greedy algorithms, graph algorithms, dynamic programming, and backtracking.
-
-
 ## **1. Power of a Number**
 
 ### Aim
@@ -730,7 +725,7 @@ void strassen(int A[][2], int B[][2], int C[][2]) {
 
 ---
 
-## **18. Convex Hull **
+## **18. Convex Hull**
 
 ### Aim
 Find smallest convex polygon containing point set using polar angle sorting.
@@ -1350,7 +1345,7 @@ void matrixChainOrder(vector<int>& p) {
 
 ---
 
-## **29. Floyd-Warshall (All-Pairs Shortest Path)**
+## **29. All-Pairs Shortest Path**
 
 ### Aim
 Find shortest distances between all vertex pairs. Handles negative edges (not cycles).
@@ -1403,7 +1398,6 @@ void floydWarshall(vector<vector<int>>& dist, int V) {
 - Game pathfinding
 - Transitive closure
 
-![Floyd-Warshall Visualization](09Lecture/Images/floydWarshall.png)
 
 ---
 
